@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { Award, Book, Calendar, Pencil, Users, Sparkles } from 'lucide-react';
+import { Award, Book, Calendar, Pencil, Users, Sparkles, ArrowRight } from 'lucide-react';
 
 const features = [
   {
