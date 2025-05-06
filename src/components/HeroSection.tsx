@@ -1,7 +1,7 @@
 
 import { Button } from '../components/ui/button';
-import { ArrowRight, BookOpen, Sparkles, Rocket } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { ArrowRight, BookOpen, Sparkles, Rocket, PenTool, Target, Brain } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
 
 const HeroSection = () => {
   const scrollToSection = (id: string) => {
@@ -13,6 +13,7 @@ const HeroSection = () => {
     }
   };
 
+  // Animation for changing text
   const [animatedText, setAnimatedText] = useState('ENEM');
   const examTypes = ['ENEM', 'Vestibulares', 'Concursos', 'Certificações'];
   
@@ -27,10 +28,41 @@ const HeroSection = () => {
     return () => clearInterval(interval);
   }, []);
 
+  // Floating icons animation
+  const icons = [
+    { icon: <BookOpen size={28} />, color: 'bg-chatcapacita-light-purple' },
+    { icon: <Target size={28} />, color: 'bg-chatcapacita-light-blue' },
+    { icon: <PenTool size={28} />, color: 'bg-chatcapacita-light-yellow' },
+    { icon: <Brain size={28} />, color: 'bg-chatcapacita-light-green' },
+  ];
+
   return (
-    <section className="pt-32 pb-20 bg-gradient-to-b from-chatcapacita-light-purple/30 to-white overflow-hidden">
+    <section className="pt-32 pb-20 bg-gradient-to-b from-chatcapacita-light-purple/30 to-white overflow-hidden relative">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-20 left-20 w-64 h-64 bg-chatcapacita-light-purple rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-float"></div>
+        <div className="absolute bottom-10 right-20 w-64 h-64 bg-chatcapacita-light-blue rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-float" style={{animationDelay: '1.5s'}}></div>
+        <div className="absolute top-40 right-40 w-40 h-40 bg-chatcapacita-light-yellow rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-float" style={{animationDelay: '2.2s'}}></div>
+        
+        {/* Floating educational icons */}
+        {icons.map((item, i) => (
+          <div 
+            key={i} 
+            className={`absolute hidden md:flex ${item.color} p-3 rounded-full items-center justify-center animate-float shadow-lg`} 
+            style={{
+              top: `${20 + (i * 15)}%`, 
+              left: i % 2 === 0 ? '8%' : '92%',
+              animationDelay: `${i * 0.7}s`,
+              transform: `rotate(${i % 2 === 0 ? 10 : -10}deg)`
+            }}
+          >
+            <div className="text-chatcapacita-purple">{item.icon}</div>
+          </div>
+        ))}
+      </div>
+
       <div className="container mx-auto px-4">
-        <div className="flex flex-col-reverse lg:flex-row items-center">
+        <div className="flex flex-col-reverse lg:flex-row items-center relative z-10">
           <div className="w-full lg:w-1/2 mt-8 lg:mt-0">
             <div className="flex items-center mb-3 animate-fade-in">
               <div className="bg-chatcapacita-purple text-white rounded-full p-1 mr-2">
@@ -40,16 +72,16 @@ const HeroSection = () => {
             </div>
             
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 font-poppins leading-tight animate-fade-in">
-              Prepare-se para vencer: seu novo jeito de <span className="relative">
-                <span className="text-chatcapacita-purple">aprender</span>
+              Aprenda de forma <span className="relative">
+                <span className="text-chatcapacita-purple">inteligente</span>
                 <svg className="absolute -bottom-2 w-full" viewBox="0 0 100 15" preserveAspectRatio="none">
                   <path d="M0,5 Q50,15 100,5" stroke="#E5DEFF" strokeWidth="8" fill="none" />
                 </svg>
-              </span> chegou!
+              </span> e conquiste seus sonhos!
             </h1>
             
             <p className="mt-6 text-lg md:text-xl text-gray-700 max-w-xl animate-fade-in" style={{ animationDelay: "0.2s" }}>
-              Inteligência artificial, planos de estudo inteligentes, correção de redações e gamificação — tudo para você conquistar o <span className="font-bold text-chatcapacita-purple transition-all duration-700">{animatedText}</span>.
+              Com a ajuda de professores IA, planos de estudo personalizados e correção automática de redações para seu <span className="font-bold text-chatcapacita-purple transition-all duration-700">{animatedText}</span>.
             </p>
             
             <div className="mt-8 flex flex-col sm:flex-row gap-4 animate-fade-in" style={{ animationDelay: "0.3s" }}>
@@ -60,7 +92,7 @@ const HeroSection = () => {
                 <span className="absolute right-full top-0 h-full w-full bg-white/20 transition-all duration-500 group-hover:right-0 group-hover:opacity-0"></span>
                 <span className="flex items-center gap-2">
                   <BookOpen size={20} /> 
-                  Comece Gratuitamente
+                  Testar Gratuitamente
                 </span>
               </Button>
               <Button 
