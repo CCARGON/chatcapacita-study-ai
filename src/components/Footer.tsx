@@ -1,5 +1,5 @@
 
-import { Instagram, Linkedin, TikTok } from 'lucide-react';
+import { Instagram, Linkedin, Youtube } from 'lucide-react';
 
 const Footer = () => {
   const year = new Date().getFullYear();
@@ -44,7 +44,7 @@ const Footer = () => {
                 <Linkedin size={20} />
               </a>
               <a href="#" className="bg-gray-800 hover:bg-chatcapacita-purple text-white p-2 rounded-full transition-colors">
-                <TikTok size={20} />
+                <Youtube size={20} />
               </a>
             </div>
           </div>
